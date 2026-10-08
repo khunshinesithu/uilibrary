@@ -31,9 +31,24 @@ The site is published to GitHub Pages each time `main` changes.
 
    `files` sets which files the site shows, and in what order.
 
+4. For a live preview, add a `preview.tsx` with a default export that renders
+   the component. Set `previewHeight` (in px) in `component.json`.
+
+## How imports work in previews
+
+Saved code imports things like `@/components/X` or `@/helpers/classname-helper`.
+The site finds them like this:
+
+1. `@/components/X` → `components/<any folder>/X.tsx`
+2. Anything else → `shared/<path>`
+
+`shared/` holds helpers and stand-ins for files that are not saved yet.
+Each stand-in says so at the top of the file.
+
 ## Folders
 
 ```
-components/   saved components (original code + component.json)
-src/          the website
+components/   saved components (original code + component.json + preview.tsx)
+shared/       helpers and stand-ins that the saved code imports
+src/          the website (src/preview is the live preview page)
 ```

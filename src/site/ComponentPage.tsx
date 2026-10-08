@@ -30,6 +30,23 @@ export function ComponentPage({ entry }: { entry: ComponentEntry }) {
         </div>
       </header>
 
+      {entry.hasPreview ? (
+        <section>
+          <div className="section-head">
+            <h2>Preview</h2>
+            <a href={`preview.html#/${entry.slug}`} rel="noreferrer" target="_blank">
+              Open full screen ↗
+            </a>
+          </div>
+          <iframe
+            className="preview"
+            src={`preview.html#/${entry.slug}`}
+            style={{ height: entry.previewHeight ?? 480 }}
+            title={`${entry.name} preview`}
+          />
+        </section>
+      ) : null}
+
       {entry.install ? (
         <section>
           <h2>Install</h2>

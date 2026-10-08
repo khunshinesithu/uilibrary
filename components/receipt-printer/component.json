@@ -2,7 +2,11 @@
   "name": "Receipt Printer",
   "description": "A checkout status that prints a receipt when payment is done. Three stages: processing, printing, complete.",
   "source": "https://www.dqnamo.com/kitchen",
-  "stack": ["React", "Tailwind CSS", "Motion"],
+  "stack": [
+    "React",
+    "Tailwind CSS",
+    "Motion"
+  ],
   "install": "npm install motion @phosphor-icons/react",
   "requires": [
     "cn() helper from @/helpers/classname-helper",
@@ -12,5 +16,9 @@
     "/textures/receipt-paper.svg",
     "/images/receipt-printer-logo.png (example only)"
   ],
-  "files": ["ReceiptPrinter.tsx", "CheckoutStatus.tsx"]
+  "files": [
+    "ReceiptPrinter.tsx",
+    "CheckoutStatus.tsx"
+  ],
+  "previewHeight": 860
 }

@@ -117,6 +117,18 @@ a { color: inherit; }
 .detail h2 { margin: 0 0 10px; font-size: 15px; }
 .hint { margin: -6px 0 10px; color: var(--muted); font-size: 14px; }
 
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.section-head a { color: var(--muted); font-size: 13px; text-decoration: none; }
+.section-head a:hover { color: var(--text); }
+
+.preview {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
 .command {
   display: flex;
   align-items: center;
