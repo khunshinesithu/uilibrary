@@ -1,0 +1,12 @@
+{
+  "name": "Calendar Series",
+  "description": "A column of month calendars. Colored days hold a post. Click a day to open it in the card, and click an image to see it larger.",
+  "source": "https://recent.design/i/rlarb1l-logan-liffick",
+  "stack": ["React", "Tailwind CSS", "Motion"],
+  "install": "npm install motion @phosphor-icons/react",
+  "requires": [
+    "Figtree font (optional, for the same look as the reference)"
+  ],
+  "files": ["CalendarSeries.tsx", "preview.tsx"],
+  "previewHeight": 860
+}
