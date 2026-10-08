@@ -20,29 +20,6 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111113;
-    --surface: #18181b;
-    --text: #ededef;
-    --muted: #9b9ba4;
-    --border: #2a2a2e;
-    --code-bg: #141416;
-
-    --sh-class: #c4b5fd;
-    --sh-identifier: #ededef;
-    --sh-sign: #7c7c86;
-    --sh-property: #67e8f9;
-    --sh-entity: #7dd3fc;
-    --sh-jsxliterals: #ededef;
-    --sh-string: #86efac;
-    --sh-keyword: #fdba74;
-    --sh-comment: #6b6b74;
-
-    color-scheme: dark;
-  }
-}
-
 * { box-sizing: border-box; }
 
 body {

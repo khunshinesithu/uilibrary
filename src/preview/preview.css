@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/* White theme only: dark: classes apply only inside a .dark parent, which the site never uses. */
+@custom-variant dark (&:where(.dark, .dark *));
 
 /*
   Color tokens used by the saved components (grayscale-1..12, green-9).
@@ -6,6 +11,9 @@
   "green" scales, which use the same 1-12 steps. Replace them with your real values.
 */
 @theme {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+
   --color-grayscale-1: #fcfcfc;
   --color-grayscale-2: #f9f9f9;
   --color-grayscale-3: #f0f0f0;
@@ -21,33 +29,19 @@
   --color-green-9: #30a46c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-grayscale-1: #111111;
-    --color-grayscale-2: #191919;
-    --color-grayscale-3: #222222;
-    --color-grayscale-4: #2a2a2a;
-    --color-grayscale-5: #313131;
-    --color-grayscale-6: #3a3a3a;
-    --color-grayscale-7: #484848;
-    --color-grayscale-8: #606060;
-    --color-grayscale-9: #6e6e6e;
-    --color-grayscale-10: #7b7b7b;
-    --color-grayscale-11: #b4b4b4;
-    --color-grayscale-12: #eeeeee;
-    --color-green-9: #33b074;
-  }
+/* Preview page: center the component. */
+:root {
+  color-scheme: light;
 }
 
-/* Preview page: center the component. */
 body {
   display: flex;
   min-height: 100vh;
   justify-content: center;
   padding: 32px 16px;
-  background: var(--color-grayscale-2);
+  background: var(--color-grayscale-1);
   color: var(--color-grayscale-12);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-sans);
 }
 
 #root {
