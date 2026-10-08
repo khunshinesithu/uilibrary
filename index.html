@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UI Library</title>
+  <style>
+    :root {
+      --bg: #f6f6f4;
+      --surface: #ffffff;
+      --text: #1b1b1f;
+      --muted: #6b6b75;
+      --border: #e4e4e0;
+      --accent: #4f46e5;
+      --accent-soft: #eef0ff;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121214;
+        --surface: #1c1c20;
+        --text: #f1f1f3;
+        --muted: #9a9aa5;
+        --border: #2c2c32;
+        --accent: #8b85ff;
+        --accent-soft: #25243d;
+        color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header, main { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    header { padding-top: 48px; padding-bottom: 24px; }
+    h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -0.02em; }
+    .subtitle { margin: 0; color: var(--muted); }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; align-items: center; }
+    .search {
+      flex: 1 1 220px;
+      max-width: 320px;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      font: inherit;
+    }
+    .search:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+    .tag-btn {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--muted);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .tag-btn[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      padding-bottom: 64px;
+    }
+    @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .preview {
+      position: relative;
+      height: 280px;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    /* Show the component at 80% size so taller demos still fit. */
+    .preview iframe {
+      width: 125%;
+      height: 125%;
+      border: 0;
+      display: block;
+      transform: scale(.8);
+      transform-origin: top left;
+    }
+    .info { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .info h2 { margin: 0; font-size: 16px; }
+    .note { margin: 0; color: var(--muted); font-size: 14px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; align-items: center; }
+    .tag { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+    .links { margin-left: auto; display: flex; gap: 12px; font-size: 14px; }
+    .links a { color: var(--accent); text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+    .empty { color: var(--muted); padding: 48px 0; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UI Library</h1>
+    <p class="subtitle">A personal collection of UI components I like.</p>
+    <div class="toolbar">
+      <input class="search" type="search" placeholder="Search components…" aria-label="Search components">
+      <div id="tags" class="toolbar" style="margin:0"></div>
+    </div>
+  </header>
+
+  <main>
+    <div id="grid" class="grid"></div>
+    <p id="empty" class="empty" hidden>No components match.</p>
+  </main>
+
+  <script src="components.js"></script>
+  <script>
+    const items = window.COMPONENTS || [];
+    const grid = document.getElementById("grid");
+    const tagsBox = document.getElementById("tags");
+    const search = document.querySelector(".search");
+    const empty = document.getElementById("empty");
+    let activeTag = null;
+
+    function el(tag, props = {}, children = []) {
+      const node = Object.assign(document.createElement(tag), props);
+      node.append(...children);
+      return node;
+    }
+
+    function buildCard(c) {
+      const url = `components/${c.id}/index.html`;
+      const links = [el("a", { href: url, target: "_blank", textContent: "Open" })];
+      if (c.source) links.push(el("a", { href: c.source, target: "_blank", rel: "noopener", textContent: "Source" }));
+
+      return el("article", { className: "card" }, [
+        el("div", { className: "preview" }, [
+          el("iframe", { src: url, title: `${c.name} preview`, loading: "lazy" }),
+        ]),
+        el("div", { className: "info" }, [
+          el("h2", { textContent: c.name }),
+          c.note ? el("p", { className: "note", textContent: c.note }) : "",
+          el("div", { className: "meta" }, [
+            ...(c.tags || []).map(t => el("span", { className: "tag", textContent: t })),
+            el("span", { className: "links" }, links),
+          ]),
+        ]),
+      ]);
+    }
+
+    function render() {
+      const q = search.value.trim().toLowerCase();
+      const shown = items.filter(c => {
+        const text = [c.name, c.note, ...(c.tags || [])].join(" ").toLowerCase();
+        return (!q || text.includes(q)) && (!activeTag || (c.tags || []).includes(activeTag));
+      });
+      grid.replaceChildren(...shown.map(buildCard));
+      empty.hidden = shown.length > 0;
+    }
+
+    const allTags = [...new Set(items.flatMap(c => c.tags || []))].sort();
+    for (const t of [null, ...allTags]) {
+      const btn = el("button", { className: "tag-btn", textContent: t ?? "All" });
+      btn.setAttribute("aria-pressed", String(t === activeTag));
+      btn.addEventListener("click", () => {
+        activeTag = t;
+        tagsBox.querySelectorAll(".tag-btn").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+        render();
+      });
+      tagsBox.append(btn);
+    }
+
+    search.addEventListener("input", render);
+    render();
+  </script>
+</body>
+</html>
