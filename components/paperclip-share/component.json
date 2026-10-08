@@ -1,0 +1,12 @@
+{
+  "name": "Paperclip Share",
+  "description": "A share panel with a clipped stack of paper that previews the document, an \"Add to\" row of apps, and a copy link field.",
+  "source": "https://www.inspora.design/posts/paperclip-interaction",
+  "stack": ["React", "Tailwind CSS", "Motion"],
+  "install": "npm install motion @phosphor-icons/react",
+  "requires": [
+    "Inter font (optional, for the same look as the reference)"
+  ],
+  "files": ["PaperclipShare.tsx", "logos.tsx", "preview.tsx"],
+  "previewHeight": 860
+}
