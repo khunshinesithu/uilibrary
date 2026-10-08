@@ -34,6 +34,20 @@ The site is published to GitHub Pages each time `main` changes.
 4. For a live preview, add a `preview.tsx` with a default export that renders
    the component. Set `previewHeight` (in px) in `component.json`.
 
+5. The home page grid shows the same preview, scaled down to fit the card.
+   It is drawn on an 800 × 600 page by default. If the component does not
+   fit, make the page bigger (keep the 4:3 shape) in `component.json`:
+
+   ```json
+   "thumbnail": { "width": 1080, "height": 810 }
+   ```
+
+## Search
+
+Type in the search box on the home page (or press `/` to jump to it).
+It matches every word against the name, description and tech tags.
+`Esc` clears it. The search is kept in the address, e.g. `#/?q=calendar`.
+
 ## How imports work in previews
 
 Saved code imports things like `@/components/X` or `@/helpers/classname-helper`.

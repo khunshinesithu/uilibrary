@@ -10,6 +10,8 @@ export type ComponentInfo = {
   requires?: string[];
   /** Height of the live preview in px. Needs a preview.tsx in the folder. */
   previewHeight?: number;
+  /** Page size the grid card preview is drawn at, before it is scaled down. Default 800 x 600. */
+  thumbnail?: { width?: number; height?: number };
   /** Code files to show, in this order. */
   files: string[];
 };
