@@ -1,25 +1,25 @@
 // Live preview for the site. Same months, days and colors as the reference
-// video, with sample text and placeholder images.
+// video, with sample text and placeholder photos (see images/CREDITS.md).
 import "@fontsource-variable/figtree";
 import { CalendarSeries, type CalendarEntry } from "@/components/CalendarSeries";
-import desk from "./images/desk.jpg";
-import photo1 from "./images/photo-1.jpg";
-import photo2 from "./images/photo-2.jpg";
-import sketch from "./images/sketch.jpg";
+import cars from "./images/cars.jpg";
+import deskLaptop from "./images/desk-laptop.jpg";
+import pug1 from "./images/pug-1.jpg";
+import pug2 from "./images/pug-2.jpg";
 
 const entries: CalendarEntry[] = [
   {
     date: "2024-02-05",
     color: "#2cca8b",
     category: "Misc",
-    title: "Weekend sketches",
+    title: "Old cars, bright doors",
     body: (
       <p>
-        I spent the weekend testing a new drawing app. The brushes feel great, and{" "}
-        <a href="#">the color tools</a> are really fun. Highly recommend.
+        Found these two on a weekend walk. The yellow doors made my day.{" "}
+        <a href="#">More photos</a> from the walk are on the blog.
       </p>
     ),
-    images: [{ src: sketch, alt: "Colorful sketch", aspect: 4 / 3 }],
+    images: [{ src: cars, alt: "Two vintage cars parked in front of yellow garage doors", aspect: 4 / 3 }],
   },
   {
     date: "2024-02-14",
@@ -42,7 +42,7 @@ const entries: CalendarEntry[] = [
     category: "Blog",
     title: "My desk 🪴",
     body: <p>My desk is my favorite place. It took a long time to get it right, and I enjoyed each step.</p>,
-    images: [{ src: desk, alt: "Wooden desk with a laptop", aspect: 16 / 9 }],
+    images: [{ src: deskLaptop, alt: "Laptop on a wooden desk", aspect: 16 / 9 }],
     imagePosition: "top",
     link: { label: "Get cozy and read more", href: "#" },
   },
@@ -65,8 +65,8 @@ const entries: CalendarEntry[] = [
     color: "#25cbb5",
     category: "Photos",
     images: [
-      { src: photo1, alt: "Photo placeholder", aspect: 4 / 3 },
-      { src: photo2, alt: "Photo placeholder", aspect: 4 / 3 },
+      { src: pug1, alt: "Pug wrapped in a blanket", aspect: 4 / 3 },
+      { src: pug2, alt: "Pug resting in a blanket on a bed", aspect: 4 / 3 },
     ],
   },
 ];
